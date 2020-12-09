@@ -1,0 +1,11 @@
+
+.logo-content {
+	text-align: center;
+	margin-top: 200rpx;
+	margin-bottom: 100rpx;
+}
+.logo {
+	height: 120rpx;
+	width: 120rpx;
+}
+

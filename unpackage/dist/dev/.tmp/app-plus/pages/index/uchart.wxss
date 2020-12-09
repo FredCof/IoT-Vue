@@ -1,0 +1,63 @@
+
+page {
+	background: #F2F2F2;
+	width: 750rpx;
+	overflow-x: hidden;
+}
+.qiun-columns {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical !important;
+	-webkit-box-direction: normal !important;
+	-webkit-flex-direction: column !important;
+	        flex-direction: column !important;
+}
+.qiun-padding {
+	padding: 2%;
+	width: 96%;
+}
+.qiun-tip {
+	display: block;
+	width: auto;
+	overflow: hidden;
+	padding: 15rpx;
+	height: 30rpx;
+	line-height: 30rpx;
+	margin: 10rpx;
+	background: #ff9933;
+	font-size: 30rpx;
+	border-radius: 8rpx;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	text-align: center;
+	border: 1px solid #dc7004;
+	color: #FFFFFF;
+}
+
+/* 通用样式 */
+.qiun-charts {
+	width: 750rpx;
+	height: 500rpx;
+	background-color: #FFFFFF;
+}
+.charts {
+	width: 750rpx;
+	height: 500rpx;
+	background-color: #FFFFFF;
+}
+
+/* 横屏样式 */
+.qiun-charts-rotate {
+	width: 700rpx;
+	height: 1100rpx;
+	background-color: #FFFFFF;
+	padding: 25rpx;
+}
+.charts-rotate {
+	width: 700rpx;
+	height: 1100rpx;
+	background-color: #FFFFFF;
+}
+

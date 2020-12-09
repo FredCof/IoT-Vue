@@ -1,0 +1,1 @@
+<view class="uni-common-mt"><view class="logo-content"><view data-event-opts="{{[['tap',[['ledSwitch',['$event']]]]]}}" bindtap="__e"><block wx:if="{{ledsta}}"><image class="logo" src="/static/led-variant-on.png"></image></block><block wx:else><image class="logo" src="/static/led-variant-off.png"></image></block></view></view></view>

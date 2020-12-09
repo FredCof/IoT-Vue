@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"logo-content { text-align: center; margin-top: ",[0,200],"; margin-bottom: ",[0,100],"; }\n.",[1],"logo { height: ",[0,120],"; width: ",[0,120],"; }\n",],undefined,{path:"./pages/index/ledctrl.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/index/ledctrl.wxml') } }));
