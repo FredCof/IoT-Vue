@@ -1,6 +1,6 @@
 {
-    "name" : "KE1",
-    "appid" : "__UNI__72E5D05",
+    "name" : "IoT-Vue",
+    "appid" : "__UNI__EB9D217",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
@@ -88,7 +88,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxe5cc612c2a137255",
         "setting" : {
             "urlCheck" : false
         },

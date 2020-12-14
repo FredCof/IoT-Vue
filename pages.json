@@ -1,77 +1,76 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/devreg",
+		    "path" : "pages/login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "登录"
+		    }
+		},
+		{
+		    "path" : "pages/login/forget",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "忘记密码"
+		    }
+		},
+		{
+		    "path" : "pages/login/register",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "注册"
+		    }
+		},
+		{
+		    "path" : "pages/index/index",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "设备管理",
+		        "enablePullDownRefresh": true
+		    }
+		    
+		},
+		{
+			"path": "pages/sub/devreg",
 			"style": {
 				"navigationBarTitleText": "设备注册"
 			}
 		},
 		{
-			"path": "pages/index/devctrl",
+			"path": "pages/sub/devctrl",
 			"style": {
 				"navigationBarTitleText": "设备监控"
 			}
 		},
 		{
-			"path": "pages/index/devinfo",
+			"path": "pages/sub/devinfo",
 			"style": {
 				"navigationBarTitleText": "设备信息"
 			}
 		},
 		{
-			"path": "pages/index/devhistory",
+			"path": "pages/sub/devhistory",
 			"style": {
 				"navigationBarTitleText": "设备历史信息"
 			}
 		},
 		{
-			"path": "pages/index/ledctrl",
+			"path": "pages/sub/ledctrl",
 			"style": {
 				"navigationBarTitleText": "LED控制"
 			}
 		},
 		{
-			"path": "pages/index/uchart",
+			"path": "pages/sub/uchart",
 			"style": {
 				"navigationBarTitleText": "温湿度曲线图"
 			}
 		}
-	],
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "KE1",
+		"navigationBarTitleText": "IoT",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#007AFF",
-		"borderStyle": "black",
-		"backgroundColor": "#F8F8F8",
-		"list": [{
-				"pagePath": "pages/index/devreg",
-				"iconPath": "static/admin_off.png",
-				"selectedIconPath": "static/admin_on.png",
-				"text": "注册"
-			},
-			{
-				"pagePath": "pages/index/devinfo",
-				"iconPath": "static/admin_off.png",
-				"selectedIconPath": "static/admin_on.png",
-				"text": "查询"
-			},
-			{
-				"pagePath": "pages/index/devctrl",
-				"iconPath": "static/admin_off.png",
-				"selectedIconPath": "static/admin_on.png",
-				"text": "监控"
-			},
-			{
-				"pagePath": "pages/index/ledctrl",
-				"iconPath": "static/admin_off.png",
-				"selectedIconPath": "static/admin_on.png",
-				"text": "LED"
-			}
-		]
 	}
 }

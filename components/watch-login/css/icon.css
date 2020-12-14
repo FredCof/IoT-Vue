@@ -1,0 +1,56 @@
+@keyframes cuIcon-spin {
+	0% {
+		-webkit-transform: rotate(0);
+		transform: rotate(0);
+	}
+
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
+}
+
+.cuIconfont-spin {
+	-webkit-animation: cuIcon-spin 2s infinite linear;
+	animation: cuIcon-spin 2s infinite linear;
+	display: inline-block;
+}
+
+.cuIconfont-pulse {
+	-webkit-animation: cuIcon-spin 1s infinite steps(8);
+	animation: cuIcon-spin 1s infinite steps(8);
+	display: inline-block;
+}
+
+.cuIcon {
+	font-family: "cuIcon";
+	font-size: inherit;
+	font-style: normal;
+	font-weight: 900;
+	color: #09BB07;
+}
+
+@font-face {
+  font-family: "cuIcon";  /* project id 1768034 */
+  src: url('//at.alicdn.com/t/font_1768034_mrydwhopgre.eot');
+  src: url('//at.alicdn.com/t/font_1768034_mrydwhopgre.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1768034_mrydwhopgre.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1768034_mrydwhopgre.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1768034_mrydwhopgre.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1768034_mrydwhopgre.svg#iconfont') format('svg');
+}
+
+.cuIcon-attention:before {
+	content: "\e9d0";
+}
+
+.cuIcon-attentionforbid:before {
+	content: "\e9cf";
+}
+
+.cuIcon-loading1:before{
+	padding-top: -1rpx;
+	padding-right: -1rpx;
+	content: "\e646";
+	font-size: 46rpx;
+}
