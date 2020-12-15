@@ -5,19 +5,19 @@
 				<image src="../../static/pic.jpg" class="oBorder"></image>
 			</view>
 			<view class="device-info">
-				<text class="title">{{ this.devdata.name }}</text>
+				<text class="title">{{ devdata.name }}</text>
 				<hr></hr>
 				<view class="info">
 					<text class="tag">温度</text>
-					<text class="value">{{ this.termperature }}℃</text>
+					<text class="value">{{ termperature }}℃</text>
 				</view>
 				<view class="info">
 					<text class="tag">湿度</text>
-					<text class="value">{{ this.humidity }}%</text>
+					<text class="value">{{ humidity }}%</text>
 				</view>
 				<view class="info">
 					<text class="tag">光强</text>
-					<text class="value">{{ this.intensity }}Lux</text>
+					<text class="value">{{ intensity }}Lux</text>
 				</view>
 			</view>
 		</view>
@@ -38,7 +38,7 @@
 		},
 		mounted() {
 			console.log("外你");
-			console.log(this.devdata.devid);
+			console.log(this.devdata);
 			uni.request({//向云端服务发送请求获取设备最新信息
 				url: this.globalVal.default_url.devInfo,
 				method: 'POST',
@@ -77,7 +77,9 @@
 		align-items: center;
 		color: #333333;
 		padding: 0rpx 20rpx;
-		margin:20rpx 0rpx;
+		margin:20rpx 20rpx;
+		-webkit-box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
+		box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
 		.title{
 			font-size: 35rpx;
 			font-weight: 700;
@@ -112,7 +114,5 @@
 	.oBorder{
 	    border: none;
 	    border-radius: 1.5rem ;
-	    -webkit-box-shadow: 0 0 30rpx 0 rgba(53, 153, 17, 0.1) ;
-	    box-shadow: 0 0 60rpx 0 rgba(53, 153, 17, 0.1);
 	}
 </style>

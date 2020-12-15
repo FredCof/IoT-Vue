@@ -1,30 +1,35 @@
 <template>
-	<view class="uni-common-mt">
-		<view class="logo-content">
-			<image class="logo" src="/static/ke1.png"></image>
+	<view class="control-page">
+		<view class="header">
+			<image src="../../static/pic.jpg"></image>
 		</view>
-		<view class="uni-form-item uni-column">
-			<view class="with-fun">
-				<input class="uni-input inputText" placeholder="输入设备ID号" type="text" :value="devid" maxlength="36" @input="devIdInput"/>
+		<view class="des-card">
+			<view class="setline goodinfo">
+				<text>藏品名字：青铜器</text>
+				<text>藏品编号：好的</text>
 			</view>
-		</view>
-		<view class="line"></view>
-		
-		<view class="uni-form-item uni-column">
-			<view class="with-fun">
-				<input class="uni-input inputText" placeholder="输入命令码" type="number" maxlength="2" @input="cmdCodeInput"/>
+			<view class="setline">
+				<text class="des-text">
+					温度
+				</text>
+				<image src="../../static/Temper.png" mode="widthFix"></image>
+				<text class="width-set">35℃</text>
+				<uni-tag text="偏高" type="error" :circle="true"></uni-tag>
 			</view>
-		</view>
-		<view class="line"></view>
-		<view class="uni-form-item uni-column">
-			<view class="with-fun">
-				<input class="uni-input inputText" placeholder="输入命令字符" type="text" maxlength="32" @input="cmdStrInput"/>
+			<view class="setline">
+				<text class="des-text">
+					湿度
+				</text>
+				<image src="../../static/Hud.png" mode="widthFix"></image>
+				<text class="width-set">40%</text>
+				<uni-tag text="正常" type="success" :circle="true"></uni-tag>
 			</view>
-		</view>
-		
-		<view class="line"></view>
-		<view class="uni-padding-wrap uni-common-mt">
-			<button type="primary" :disabled="btnAddDisable" @tap="sendCmd">{{btnInfo}}</button>
+			<view class="setline">
+				<text class="des-text">光强</text>
+				<image src="../../static/Sun.png" mode="widthFix"></image>
+				<text class="width-set">300Lux</text>
+				<uni-tag text="偏低" type="warning" :circle="true"></uni-tag>
+			</view>
 		</view>
 	</view>
 </template>
@@ -33,90 +38,16 @@
 	export default {
 		data() {
 			return {
-				cmdcode:0,
-				cmdstr:'',
-				cntDown:null,
-				maxTime:0,
-				btnInfo:"命令下发",
-				btnAddDisable:true
+				maxTemp: 0,
+				minTemp: 0,
+				maxIns: 0,
+				minIns: 0,
+				maxHud: 0,
+				minHud: 0,
 			}
 		},
-		onLoad:function(option){
-			if (undefined != option.device){
-				uni.setStorageSync("devid", option.device)
-			}
-		},
-		methods:{
-			cmdCodeInput(e){
-				console.log("cmdCodeInput");
-				this.cmdcode = e.target.value;
-				if(0 < this.cmdcode.length){
-					this.btnAddDisable = false;
-				}else{
-					this.btnAddDisable = true;
-				}
-			},
-			cmdStrInput(e){
-				console.log("cmdStrInput");
-				this.cmdstr = e.target.value;
-				if(0 < this.cmdstr.length){
-					this.btnAddDisable = false;
-				}else{
-					this.btnAddDisable = true;
-				}
-			},
-			sendCmd(){
-				console.log("sendCmd");
-				if(0 != this.maxTime){
-					console.log("sendCmd busy");
-					return;
-				}
-				//{"cmdstring":"{"L1":0,"L2":0}","cmdlen":15,"cmdcode":3}
-				let cmdpara = {
-					cmdstring:this.cmdstr,
-					cmdlen:this.cmdstr.length,
-					cmdcode:this.cmdcode
-				}
-				let cmdstr = JSON.stringify(cmdpara);
-				console.log("cmdstr:"+cmdstr);
-				
-				uni.request({
-					url: this.globalVal.default_url.devCmd,
-					method: 'POST',
-					data: {
-						deviceId:this.devid,
-						cmdInfo:cmdstr
-					},
-					success: res => {
-						uni.showToast({//向云端服务发送命令下发请求
-							title: '命令下发成功!请检查设备端',
-							icon:"none",
-							duration:3000
-						});
-						this.btnAddDisable = true;
-						this.maxTime = 60;
-						this.countDownFun();
-					},
-					fail: () => {},
-					complete: () => {}
-				});
-			},
-			countDownFun(){
-				console.log("countDown start...");
-				this.cntDown = setInterval(()=>{
-					if(0 == this.maxTime){
-						this.btnInfo = "命令下发"
-						clearInterval(this.interval);
-						this.interval = null;
-						this.btnAddDisable = false;
-						return;
-					}else{
-						this.maxTime--;
-						this.btnInfo = this.maxTime+"秒";
-					}
-					//console.log(this.btnInfo);
-				},1000);
-			}
+		methods: {
+			
 		},
 		computed:{
 			devid(){
@@ -126,29 +57,67 @@
 	}
 </script>
 
-<style>
-	.logo-content {
+<style lang="scss" scoped>
+	.goodinfo{
+		font-size: 25rpx !important;
+	}
+	.control-page{
+		display: flex;
+		flex-direction: column;
+		justify-content:center;
+	}
+	.width-set{
+		width: 200rpx;
 		text-align: center;
-		margin-top: 200upx;
-		margin-bottom: 100upx;
 	}
-	
-	.logo {
-		height: 120upx;
-		width: 120upx;
+	.header {
+		box-shadow:0rpx 0rpx 60rpx 0rpx rgba(0,0,0,0.1);
+		overflow: hidden;
+		width: 400rpx;
+		height: 400rpx;
+		border-radius:50%;
+		margin: 100rpx auto 40rpx;
+		position: relative;
 	}
-	
-	.line {
+	.des-card{
 		width: 90%;
-		height: 1px;
-		margin-left: 30upx;
-		margin-right: 30upx;
-		background-color: #cccccc;
-		margin-top: 1px;
+		margin: 0 5%;
+		border-radius: 1rem;
+		padding: 30rpx 0;
+		-webkit-box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
+		box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
 	}
-	
-	.inputText {
-		margin-left: 30upx;
+	.setline{
+		display: flex;
+		margin: 30rpx 20rpx;
+		font-size: 35rpx;
+		justify-content: space-between;
+		align-items: center;
+		.des-text{
+			align-self: center;
+		}
+		.des-blod{
+			font-size: 40rpx;
+			font-weight: 900;
+		}
+		image{
+			width: 64rpx;
+		}
 	}
-	
+	.sendbtn{
+		padding: 0;
+		display: inline-flex;
+		flex-direction: row;
+		border-radius: 10rem;
+		border: none !important;
+		outline: none !important;
+		box-shadow:0rpx 0rpx 20rpx 2rpx rgba(164,217,228,0.8);
+		image{
+			margin: 10rpx;
+			height: 60rpx;
+		}
+		&::after{
+			border: none;
+		}
+	}
 </style>

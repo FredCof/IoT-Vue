@@ -1,9 +1,18 @@
 <template>
 	<view class="device-list">
-		<view class="" v-if="devlist.length == 0">当前没有设备</view>
-		<scroll-view v-for="item in devlist" :key="item.devid">
-			<device-info :devdata="item"></device-info>
-		</scroll-view>
+		<view class="nodivice" v-if="devlist.length == 0">
+			<image src="../../static/backgroud.png" mode="widthFix"></image>
+		</view>
+		<uni-swipe-action>
+			<uni-swipe-action-item v-for="item in devlist" :key="item.devid">
+			    <device-info :devdata="item"></device-info>
+				<template v-slot:right>
+				    <view class="delete-btn" @tap="onDelete(item.devid)">
+						<image src="../../static/Garbage.png" mode="widthFix"></image>
+					</view>
+				</template>
+			</uni-swipe-action-item>
+		</uni-swipe-action>
 		<view class="add-button" @tap="scanDev">
 			<image src="../../static/Plus.png"></image>
 		</view>
@@ -13,15 +22,41 @@
 <script>
 	export default {
 		onLoad() {
+			this.loadDivice();
 		},
 		data() {
 			return {
+				options:[
+				        {
+				            text: '取消',
+				            style: {
+				                backgroundColor: '#007aff'
+				            }
+				        }, {
+				            text: '确认',
+				            style: {
+				                backgroundColor: '#dd524d'
+				            }
+				        }
+				      ],
 				imei: "",
 				devid: "",
 				devlist: []
 			};
 		},
+		onPullDownRefresh() {
+			return;
+		},
 		methods:{
+			onDelete(rmdid){
+				console.log('点击了按钮'+rmdid)
+				for (let item in this.devlist){
+					if (this.devlist[item].devid == rmdid){
+						this.devlist.splice(item,1);
+					}
+				}
+				uni.setStorageSync("devlist", this.devlist);
+			},
 			regDev(){
 				console.log("regDev URL:"+this.globalVal.default_url.devReg);
 				uni.showLoading({
@@ -43,10 +78,22 @@
 							if(0 == errcode){
 								errmsg = "注册成功";
 								this.devid = res.data.deviceId;
-								this.devlist.push({
-									devid: res.data.deviceId,
-									name: res.data.deviceName
-								});
+								let flag = true;
+								for (let item in this.devlist){
+									if (this.devlist[item].devid == this.devid){
+										flag = false;
+										break;
+									}
+								}
+								if (flag){
+									this.devlist.push({
+										devid: res.data.deviceId,
+										name: res.data.deviceName
+									});
+								} else {
+									errmsg = "设备已经注册";
+								}
+								uni.setStorageSync("devlist", this.devlist);
 								console.log(this.devlist);
 							}else{
 								errmsg = res.data.errmsg;
@@ -111,29 +158,42 @@
 				this.imei = '867726033517824'
 				this.regDev();
 			},
+			loadDivice(){
+				let dl = uni.getStorageSync("devlist");
+				console.log(dl);
+				if ('' != dl){
+					this.devlist = dl;
+				}
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.nodivice{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
 	.device-list{
 		display: flex;
 		flex-direction: column;
-		padding:0 20rpx;
+		padding:0;
 	}
 	.add-button{
 		height: 80rpx;
 		width: 80rpx;
 		align-content: center;
-		background-color: #f3f3f3;
+		background-color: #ffffff;
 		position: fixed;
-		bottom: 20rpx;
-		right: 20rpx;
+		bottom: 40rpx;
+		right: 40rpx;
 		padding: 10rpx;
 		border: none;
 		border-radius: 1.5rem ;
-		-webkit-box-shadow: 0 0 30rpx 0 rgba(149, 165, 154, 0.6);
-		box-shadow: 0 0 60rpx 0 rgba(149, 165, 154, 0.6);
+		-webkit-box-shadow: 0 0 30rpx 2rpx rgba(149, 165, 154, 0.6);
+		box-shadow: 0 0 30rpx 5rpx rgba(149, 165, 154, 0.6);
 		image{
 			width: 80rpx;
 			height: 80rpx;
@@ -141,5 +201,19 @@
 	}
 	.loading{
 		z-index: 100;
+	}
+	.delete-btn{
+		margin: 20rpx;
+		width: 200rpx;
+		border-radius: 2rem 5rem 5rem 2rem;
+		-webkit-box-shadow: 0 0 30rpx 0 rgba(255, 172, 174, 0.8);
+		box-shadow: 0 0 30rpx 0 rgba(255, 75, 78, 0.8);
+		image{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 80rpx;
+		}
 	}
 </style>

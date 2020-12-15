@@ -51,5 +51,7 @@
 </script>
 
 <style>
-
+	page{
+		background-color: #fcfcfc;
+	}
 </style>

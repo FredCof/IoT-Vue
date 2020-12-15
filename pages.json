@@ -37,7 +37,13 @@
                 "navigationBarTitleText": "设备信息",
                 "enablePullDownRefresh": false
             }
-            
+        },{
+            "path" : "pages/sub/uchart",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备图标信息",
+                "enablePullDownRefresh": false
+            }
         }
     ],
 	"globalStyle": {

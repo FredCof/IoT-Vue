@@ -375,7 +375,7 @@ radio-group label, checkbox-group label{
 .uni-list-cell {
 	position: relative;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -392,18 +392,6 @@ radio-group label, checkbox-group label{
 .uni-list-cell-db,
 .uni-list-cell-right {
 	flex: 1;
-}
-.uni-list-cell::after {
-	position: absolute;
-  z-index: 3;
-	right: 0;
-	bottom: 0;
-	left: 30upx;
-	height: 1px;
-	content: '';
-	-webkit-transform: scaleY(.5);
-	transform: scaleY(.5);
-	background-color: #c8c7cc;
 }
 .uni-list .uni-list-cell:last-child::after {
 	height: 0upx;
@@ -537,7 +525,7 @@ radio-group label, checkbox-group label{
 
 /* 图文列表 */
 .uni-media-list {
-	padding: 22upx 30upx;
+	padding: 2upx 30upx 30upx;
 	box-sizing: border-box;
 	display: flex;
 	width: 100%;
@@ -563,21 +551,26 @@ radio-group label, checkbox-group label{
 	width: 100%;
 }
 .uni-media-list-body {
-	height: 84upx;
+	height: 120upx;
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: flex-start;
+	align-items: center;
 	overflow: hidden;
+	border-right: #7d7d7d 4upx solid;
+}
+.uni-media-list-body:last-of-type{
+	border: none;
 }
 .uni-media-list-text-top {
-	width: 100%;
+	display: inline-block;
 	line-height: 36upx;
 	font-size: 30upx;
+	padding-bottom: 10upx;
 }
 .uni-media-list-text-bottom {
-	width: 100%;
+	padding-top: 10upx;
 	line-height: 30upx;
 	font-size: 26upx;
 	color: #8f8f94;

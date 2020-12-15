@@ -1,5 +1,5 @@
 <template>
-	<view class="uni-numbox">
+	<view :class="['uni-numbox', control?'':'no-control']">
 		<view @click="_calcValue('minus')" class="uni-numbox__minus">
 			<text class="uni-numbox--text" :class="{ 'uni-numbox--disabled': inputValue <= min || disabled }">-</text>
 		</view>
@@ -32,6 +32,10 @@
 			disabled: {
 				type: Boolean,
 				default: false
+			},
+			control: {
+				type: Boolean,
+				default: true
 			}
 		},
 		data() {
@@ -102,14 +106,31 @@
 
 	.uni-numbox {
 		/* #ifndef APP-NVUE */
-		display: flex;
+		display: inline-flex;
 		/* #endif */
 		flex-direction: row;
 		height: 35px;
 		line-height: 35px;
 		width: 120px;
 	}
-
+	
+	.no-control{
+		width: 120rpx;
+		margin: 0 10rpx;
+	}
+	.no-control .uni-numbox__minus{
+		display: none !important;
+	}
+	.no-control .uni-numbox__plus{
+		display: none !important;
+	}
+	.no-control .uni-numbox__value{
+		width: 120rpx;
+		border-left-width: 1rpx;
+		border-right-width: 1rpx;
+		border-radius: 2rem;
+	}
+	
 	.uni-numbox__value {
 		background-color: #ffffff;
 		width: 40px;
@@ -145,6 +166,8 @@
 		border-top-left-radius: 6rpx;
 		border-bottom-left-radius: 6rpx;
 		border-right-width: 0;
+		
+		border-radius: 2rem 0 0 2rem;
 	}
 
 	.uni-numbox__plus {
@@ -163,6 +186,7 @@
 		border-bottom-right-radius: 6rpx;
 		background-color: #f8f8f8;
 		border-left-width: 0;
+		border-radius: 0 2rem 2rem 0;
 	}
 
 	.uni-numbox--text {

@@ -67,9 +67,9 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		padding: 0px 16px;
-		height: 30px;
-		line-height: 30px;
+		padding: 1px 3px;
+		height: 30rpx;
+		line-height: 16px;
 		justify-content: center;
 		color: #333;
 		border-radius: 6rpx;

@@ -32,7 +32,6 @@
 	export default {
 		data() {
 			return {
-				devid:'35cff258-676a-483f-bea0-01089d72c343',
 				cWidth: '',
 				cHeight: '',
 				cWidth2: '', //横屏图表
@@ -69,6 +68,14 @@
 							if(undefined == res.data.error_code){
 								let devhistory = res.data.deviceDataHistoryDTOs;
 								//.data.deviceDataHistoryDTOs["0"].data.infostring
+								this.refreshData(devhistory);
+							}
+							if(undefined == res.data.error_code){
+								let devhistory = [];
+								for (let i = 0; i < res.data.deviceDataHistoryDTOs.length; i++){
+									if (undefined != res.data.deviceDataHistoryDTOs[i].data.infostring)
+										devhistory.push(res.data.deviceDataHistoryDTOs[i])
+								}
 								this.refreshData(devhistory);
 							}
 						}
@@ -248,6 +255,11 @@
 			    // 时间戳转为时间
 			    var beijing_datetime = new Date(parseInt(timestamp) * 1000);
 			    return beijing_datetime; // 2017-03-31 16:02:06
+			}
+		},
+		computed:{
+			devid(){
+				return uni.getStorageSync("devid")
 			}
 		}
 	}

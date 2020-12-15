@@ -2,7 +2,7 @@
 	<view class="zdTabBar">
 		<view class="ul">
 			<view :class="['li',cur == index?'cur' :'']" v-for="(item,index) in taBbarList" :key="index" @tap="navigatorTo(item, index)">
-				<view :class="[cur == index?'ic' :'img']">
+				<view :class="['tabicon' ,cur == index?'ic' :'img']">
 					<image :src="cur == index ? item.selectIcon : item.icon" mode="widthFix"></image>
 				</view>
 				<view class="p">{{item.name}}</view>
@@ -99,6 +99,9 @@
 				flex: 1;
 				padding-top: 5px;
 				position: relative;
+				.tabicon{
+					transition: all ease-in-out .3s;
+				}
 				.img{
 					width: 25px;
 					height: 25px;
@@ -121,7 +124,9 @@
 					box-shadow: 0 0 20rpx 0 rgba(18, 124, 80, .5) ;
 					transform: scale(1.2);
 					image{
-						margin: 15% 20%;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
 						position: absolute;
 						width: 60%;
 					}
