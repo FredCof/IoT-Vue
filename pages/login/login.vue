@@ -67,7 +67,7 @@
 				    title: data.msg
 				});
 			})
-			//this.isLogin();
+			this.isLogin();
 		},
 		methods: {
 			isLogin(){
@@ -77,9 +77,9 @@
 					if (value) {
 						//有登录信息
 						console.log("已登录用户：",value);
-						_this.$store.dispatch("setUserData",value); //存入状态
+						// _this.$store.dispatch("setUserData",value); //存入状态
 						uni.reLaunch({
-							url: '../../../pages/index',
+							url: '../index/index',
 						});
 					}
 				} catch (e) {
@@ -114,7 +114,12 @@
 				
 				_this.isRotate=true
 				setTimeout(function(){
-					_this.isRotate=false
+					_this.isRotate=false;
+					try {
+					    uni.setStorageSync('setUserData', 'hello');
+					} catch (e) {
+					    // error
+					}
 					uni.reLaunch({
 						url: '../index/index',
 					});

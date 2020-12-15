@@ -1,9 +1,8 @@
 <template>
 	<view class="device-list">
-		<loading v-if="loading"></loading>
 		<view class="" v-if="devlist.length == 0">当前没有设备</view>
 		<scroll-view v-for="item in devlist" :key="item.devid">
-			<device-info :data="item"></device-info>
+			<device-info :devdata="item"></device-info>
 		</scroll-view>
 		<view class="add-button" @tap="scanDev">
 			<image src="../../static/Plus.png"></image>
@@ -19,7 +18,6 @@
 			return {
 				imei: "",
 				devid: "",
-				loading: true,
 				devlist: []
 			};
 		},
@@ -67,43 +65,51 @@
 				});
 			},
 			scanDev(){
-				uni.scanCode({//启动摄像头扫描模组二维码获取IMEI号
-					success: (res) => {
-						var result;
-						console.log('条码类型：' + res.scanType);
-						console.log('条码内容：' + res.result);
-						if(res.result.length>15){
-							result = res.result.substring(0,15);
-						}else{
-							result = res.result;
-						}
-						console.log('result：' + result);
-						this.imei = result;
-						// this.btnAddDisable = false;
-						this.regDev();
-					},
-					fail: (err) => {
-						console.log(err);
-						// #ifdef MP
-						uni.getSetting({
-							success: (res) => {
-								let authStatus = res.authSetting['scope.camera'];
-								if (!authStatus) {
-									uni.showModal({
-										title: '授权失败',
-										content: this.i18n.content_note.text_app_name+'需要使用您的相机，请在设置界面打开相关权限',
-										success: (res) => {
-											if (res.confirm) {
-												uni.openSetting()
-											}
-										}
-									})
-								}
-							}
-						})
-						// #endif
-					}
+				uni.showLoading({
+					title: '数据加载中...',
+					mask: false
 				});
+			    // #ifndef H5
+				// uni.scanCode({//启动摄像头扫描模组二维码获取IMEI号
+				// 	success: (res) => {
+				// 		var result;
+				// 		console.log('条码类型：' + res.scanType);
+				// 		console.log('条码内容：' + res.result);
+				// 		if(res.result.length>15){
+				// 			result = res.result.substring(0,15);
+				// 		}else{
+				// 			result = res.result;
+				// 		}
+				// 		console.log('result：' + result);
+				// 		this.imei = result;
+				// 		console.log(this.imei);
+				// 		// this.btnAddDisable = false;
+				// 	},
+				// 	fail: (err) => {
+				// 		console.log(err);
+				// 		// #ifdef MP
+				// 		uni.getSetting({
+				// 			success: (res) => {
+				// 				let authStatus = res.authSetting['scope.camera'];
+				// 				if (!authStatus) {
+				// 					uni.showModal({
+				// 						title: '授权失败',
+				// 						content: this.i18n.content_note.text_app_name+'需要使用您的相机，请在设置界面打开相关权限',
+				// 						success: (res) => {
+				// 							if (res.confirm) {
+				// 								uni.openSetting()
+				// 							}
+				// 						}
+				// 					})
+				// 				}
+				// 			}
+				// 		})
+				// 		// #endif
+				// 	}
+				// });
+				// #endif
+				this.imei = '867726033517824'
+				this.regDev();
 			},
 		}
 	}

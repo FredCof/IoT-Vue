@@ -1,23 +1,23 @@
 <template>
-	<navigator animation-type="zoom-out" animation-duration="300" url="../../pages/sub/devctrl?device=35cff258-676a-483f-bea0-01089d72c34t">
+	<navigator animation-type="zoom-out" animation-duration="300" :url="url">
 		<view class="device-card oBorder">
 			<view class="artpic">
 				<image src="../../static/pic.jpg" class="oBorder"></image>
 			</view>
 			<view class="device-info">
-				<text class="title">不知道是啥</text>
+				<text class="title">{{ this.devdata.name }}</text>
 				<hr></hr>
 				<view class="info">
 					<text class="tag">温度</text>
-					<text class="value">1℃</text>
-				</view>
-				<view class="info">
-					<text class="tag">光强</text>
-					<text class="value">152lux</text>
+					<text class="value">{{ this.termperature }}℃</text>
 				</view>
 				<view class="info">
 					<text class="tag">湿度</text>
-					<text class="value">50%</text>
+					<text class="value">{{ this.humidity }}%</text>
+				</view>
+				<view class="info">
+					<text class="tag">光强</text>
+					<text class="value">{{ this.intensity }}Lux</text>
 				</view>
 			</view>
 		</view>
@@ -28,10 +28,42 @@
 	export default {
 		data() {
 			return {
-				
+				termperature: 0,
+				humidity: 0,
+				intensity: 0
 			};
 		},
-		methods: {
+		props:{
+			devdata: Object
+		},
+		mounted() {
+			console.log("外你");
+			console.log(this.devdata.devid);
+			uni.request({//向云端服务发送请求获取设备最新信息
+				url: this.globalVal.default_url.devInfo,
+				method: 'POST',
+				data: {
+					deviceId:this.devdata.devid
+				},
+				success: res => {
+					console.log(res);
+					if(200 == res.statusCode && undefined == res.data.error_code){
+						this.userinfo = res.data.services[1].data.infostring;
+						let val = JSON.parse(this.userinfo);
+						this.termperature = val.T;
+						this.humidity = val.H;
+						this.intensity = val.L;
+					}
+				},
+				fail: () => {},
+				complete: () => {}
+			});
+		},
+		methods:{},
+		computed:{
+			url(){
+				return '../../pages/device/devindex?device='+this.devdata.devid
+			}
 		}
 	}
 </script>
@@ -49,6 +81,7 @@
 		.title{
 			font-size: 35rpx;
 			font-weight: 700;
+			white-space: nowrap;
 		}
 		.info{
 			.tag{

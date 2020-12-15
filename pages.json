@@ -29,43 +29,16 @@
 		        "enablePullDownRefresh": true
 		    }
 		    
-		},
-		{
-			"path": "pages/sub/devreg",
-			"style": {
-				"navigationBarTitleText": "设备注册"
-			}
-		},
-		{
-			"path": "pages/sub/devctrl",
-			"style": {
-				"navigationBarTitleText": "设备监控"
-			}
-		},
-		{
-			"path": "pages/sub/devinfo",
-			"style": {
-				"navigationBarTitleText": "设备信息"
-			}
-		},
-		{
-			"path": "pages/sub/devhistory",
-			"style": {
-				"navigationBarTitleText": "设备历史信息"
-			}
-		},
-		{
-			"path": "pages/sub/ledctrl",
-			"style": {
-				"navigationBarTitleText": "LED控制"
-			}
-		},
-		{
-			"path": "pages/sub/uchart",
-			"style": {
-				"navigationBarTitleText": "温湿度曲线图"
-			}
 		}
+        ,{
+            "path" : "pages/device/devindex",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "设备信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

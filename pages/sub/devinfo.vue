@@ -31,7 +31,7 @@
 	export default {
 		data() {
 			return {
-				devid:'35cff258-676a-483f-bea0-01089d72c343',
+				devid:'a6e98dec-edbf-4198-a673-356c2d4bd3a6',
 				devinfo:null,
 				userinfo:null,
 				termperature:null,
@@ -64,21 +64,25 @@
 						deviceId:this.devid
 					},
 					success: res => {
-						console.log(res);
 						if(200 == res.statusCode){
+							console.info(res)
 							this.devinfo = JSON.stringify(res.data);
 							if(undefined == res.data.error_code){
-								this.userinfo = res.data.services[0].data.infostring;
-								let val = JSON.parse(this.userinfo);
-								this.termperature = val.T;
-								this.humidity = val.H;
+								this.userinfo = res.data.services[1].data.infostring;
+								console.log(res.data.services);
+								console.log(this.userinfo);
+								// let val = JSON.parse(this.userinfo);
+								// this.termperature = val.T;
+								// this.humidity = val.H;
 								
-								console.log("温度: "+val.T+"C"+" 湿度: "+val.H+"%");
+								// console.log("温度:  "+val.T+"C"+" 湿度: "+val.H+"%");
 							}
 							
 						}
 					},
-					fail: () => {},
+					fail: () => {
+						console.log("错误");
+					},
 					complete: () => {
 						uni.hideLoading();
 					}

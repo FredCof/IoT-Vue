@@ -1,6 +1,5 @@
 <template>
-	<view class="tab">
-		nihao
+	<view>
 	</view>
 </template>
 
@@ -9,11 +8,14 @@
 		data() {
 			return {
 				
-			};
+			}
+		},
+		methods: {
+			
 		}
 	}
 </script>
 
-<style lang="scss">
+<style>
 
 </style>
