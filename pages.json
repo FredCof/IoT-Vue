@@ -29,6 +29,14 @@
 		        "enablePullDownRefresh": true
 		    }
 		    
+		},
+		{
+		    "path" : "pages/index/my",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "个人"
+		    }
+		    
 		}
         ,{
             "path" : "pages/device/devindex",
@@ -37,13 +45,15 @@
                 "navigationBarTitleText": "设备信息",
                 "enablePullDownRefresh": false
             }
-        },{
-            "path" : "pages/sub/uchart",
+        }
+        ,{
+            "path" : "pages/index/my",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "设备图标信息",
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
+            
         }
     ],
 	"globalStyle": {
@@ -51,5 +61,24 @@
 		"navigationBarTitleText": "IoT",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#50c363",
+		"borderStyle": "white",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/LikeOff.png",
+				"selectedIconPath": "static/Like.png",
+				"text": "注册"
+			},
+			{
+				"pagePath": "pages/index/my",
+				"iconPath": "static/AvatarOff.png",
+				"selectedIconPath": "static/Avatar.png",
+				"text": "我的"
+			}
+		]
 	}
 }

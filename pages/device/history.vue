@@ -6,24 +6,30 @@
 				<view class="time-stamp">时间: {{item.timestamp}}</view>
 				<view class="uni-media-list">
 					<view class="uni-media-list-body">
-						<text class="uni-media-list-text-top">{{item.data.infostring.T}}度</text>
-						<uni-tag text="偏高" type="error" :circle="true"></uni-tag>
+						<text class="uni-media-list-text-top">{{item.data.infostring.T}}℃</text>
+						<uni-tag v-if="item.data.infostring.T >= setting.tMax" text="偏高" type="error" :circle="true"></uni-tag>
+						<uni-tag v-else-if="item.data.infostring.T <= setting.tMin" text="偏低" type="warning" :circle="true"></uni-tag>
+						<uni-tag v-else text="正常" type="success" :circle="true"></uni-tag>
 						<view class="uni-media-list-text-bottom uni-ellipsis">温度</view>
 					</view>
 					<view class="uni-media-list-body">
 						<view class="uni-media-list-text-top">{{item.data.infostring.H}}%</view>
-						<uni-tag text="正常" type="success" :circle="true"></uni-tag>
+						<uni-tag v-if="item.data.infostring.H >= setting.hMax" text="偏高" type="error" :circle="true"></uni-tag>
+						<uni-tag v-else-if="item.data.infostring.H <= setting.hMin" text="偏低" type="warning" :circle="true"></uni-tag>
+						<uni-tag v-else text="正常" type="success" :circle="true"></uni-tag>
 						<view class="uni-media-list-text-bottom uni-ellipsis">湿度</view>
 					</view>
 					<view class="uni-media-list-body">
 						<view class="uni-media-list-text-top">{{item.data.infostring.L}}Lux</view>
-						<uni-tag text="偏低" type="warning" :circle="true"></uni-tag>
+						<uni-tag v-if="item.data.infostring.L >= setting.iMax" text="偏高" type="error" :circle="true"></uni-tag>
+						<uni-tag v-else-if="item.data.infostring.L <= setting.iMin" text="偏低" type="warning" :circle="true"></uni-tag>
+						<uni-tag v-else text="正常" type="success" :circle="true"></uni-tag>
 						<view class="uni-media-list-text-bottom uni-ellipsis">光强</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="qiun-columns" v-if="!chart">
+		<view class="qiun-columns" v-if="!chart" style="z-index: -1;">
 			<view>区域图</view>
 			<view class="qiun-charts">
 				<!--#ifdef MP-ALIPAY -->
@@ -291,7 +297,10 @@
 		},
 		computed:{
 			devid(){
-				return uni.getStorageSync("devid")
+				return uni.getStorageSync("device").devid;
+			},
+			setting(){
+				return uni.getStorageSync("device").setting;
 			}
 		}
 	}
@@ -304,6 +313,11 @@
 		box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
 		border: none;
 		border-radius: 1rem;
+	}
+	.cofal-cell:last-of-type{
+		// #ifdef H5
+		margin-bottom: 150rpx;
+		// #endif
 	}
 	.time-stamp{
 		padding-left: 20rpx;
@@ -339,6 +353,7 @@
 	}
 	.float-btn{
 		height: 80rpx;
+		width: 80rpx;
 		border-radius: 50%;
 		background-color: #ffffff;
 		box-shadow: 5rpx 5rpx 30rpx 4rpx rgba(164,217,228,0.8);
@@ -347,7 +362,7 @@
 		position: absolute;
 	}
 	.float-btn-group{
-		z-index: 100;
+		z-index: 999;
 		position: fixed;
 		bottom: 170rpx;
 		right: 20rpx;

@@ -37,8 +37,6 @@
 			devdata: Object
 		},
 		mounted() {
-			console.log("外你");
-			console.log(this.devdata);
 			uni.request({//向云端服务发送请求获取设备最新信息
 				url: this.globalVal.default_url.devInfo,
 				method: 'POST',
@@ -56,7 +54,18 @@
 					}
 				},
 				fail: () => {},
-				complete: () => {}
+				complete: () => {
+					let devlist = uni.getStorageSync("devlist");
+					for (let dev in devlist) {
+						if (devlist[dev].devid == this.devdata.devid){
+							devlist[dev].info.t = this.termperature;
+							devlist[dev].info.h = this.humidity;
+							devlist[dev].info.l = this.intensity;
+							break;
+						}
+					}
+					uni.setStorageSync("devlist", devlist);
+				}
 			});
 		},
 		methods:{},
@@ -76,11 +85,15 @@
 		justify-content: space-between;
 		align-items: center;
 		color: #333333;
+		width: calc(100% - 80rpx);
+		width: 100%;
 		padding: 0rpx 20rpx;
 		margin:20rpx 20rpx;
-		-webkit-box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
-		box-shadow: 0 0 60rpx 0 rgba(43,86,112,.1) ;
+		-webkit-box-shadow: 0 0 20rpx 4rpx rgba(43,86,112,.1) ;
+		box-shadow: 0 0 20rpx 4rpx rgba(43,86,112,.1) ;
 		.title{
+			max-width: 10px;
+			overflow: hidden;
 			font-size: 35rpx;
 			font-weight: 700;
 			white-space: nowrap;

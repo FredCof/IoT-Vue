@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view v-show="current === 0">
+		<view v-if="current === 0">
 			<info></info>
 		</view>
 		<view v-if="current === 1">
@@ -36,7 +36,13 @@
 				that.current = index;
 			});
 			if (undefined != option.device){
-				uni.setStorageSync("devid", option.device)
+				let devlist = uni.getStorageSync("devlist");
+				for (let dev in devlist) {
+					if (devlist[dev].devid == option.device){
+						uni.setStorageSync("device", devlist[dev]);
+						break;
+					}
+				}
 			}
 		},
 		methods: {
@@ -44,7 +50,7 @@
 		},
 		computed:{
 			devid(){
-				return uni.getStorageSync("devid")
+				return uni.getStorageSync("device").devid
 			}
 		}
 	}

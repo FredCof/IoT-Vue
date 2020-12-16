@@ -1,6 +1,6 @@
 <template>
 	<view class="uni-searchbar">
-		<view :style="{borderRadius:radius+'px'}" class="uni-searchbar__box" @click="searchClick">
+		<view class="uni-searchbar__box" @click="searchClick">
 			<!-- #ifdef MP-ALIPAY -->
 			<view class="uni-searchbar__box-icon-search">
 				<uni-icons color="#999999" size="18" type="search" />
@@ -15,7 +15,9 @@
 				<uni-icons color="#999999" class="" size="24" type="clear" />
 			</view>
 		</view>
-		<text @click="cancel" class="uni-searchbar__cancel" v-if="show">取消</text>
+		<button @click="cancel" class="uni-searchbar__cancel" v-show="show">
+			<image src="../../static/Close.png" mode="widthFix"></image>
+		</button>
 	</view>
 </template>
 
@@ -101,9 +103,12 @@
 		/* #endif */
 		flex-direction: row;
 		position: relative;
+		margin: 5rpx 20rpx -10rpx;
 		padding: 8px 0;
 	}
-
+	.uni-searchbar *{
+		transition: all ease .5s; 
+	}
 	.uni-searchbar__box {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -118,7 +123,9 @@
 		border-width: 1px;
 		border-style: solid;
 		border-color: #e5e5e5;
-		border-radius: 5px;
+		border-radius: 50rpx;
+		-webkit-box-shadow: 0 0 20rpx 5rpx rgba(43,86,112,.1) ;
+		box-shadow: 0 0 20rpx 5rpx rgba(43,86,112,.1) ;
 	}
 
 	.uni-searchbar__box-icon-search {
@@ -151,9 +158,29 @@
 	}
 
 	.uni-searchbar__cancel {
-		padding-left: 10px;
+		width: 32px;
+		height: 32px;
+		padding: 0;
 		line-height: 32px;
 		font-size: 14px;
 		color: #333;
+		position: relative;
+		border-radius: 100%;
+		margin-left: 10px;
+		background-color: #ffffff;
+		-webkit-box-shadow: 0 0 10rpx 6rpx rgba(43,86,112,.2) ;
+		box-shadow: 0 0 10rpx 6rpx rgba(43,86,112,.2) ;
+		position: relative;
+	}
+	.uni-searchbar__cancel::after{
+		outline: none;
+		border: none;
+	}
+	.uni-searchbar__cancel image{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 20px;
 	}
 </style>
